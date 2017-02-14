@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+	<script>
+		function isArrayLike( obj ){
+			if(Object.prototype.toString.call( obj ) == '[ object Array ]' ){
+				return true;
+			};//判断是不是一个真数组
+			var length = 'length' in obj && obj.length;
+			return typeof length === 'number' && length >= 0;//判断是不是一个伪数组
+		};
+		function each( arr, callback){
+			if(isArrayLike(arr)){
+				for(var i=0;i<arr.length;i++){
+					if(callback.call(arr[i],arr[i],i)===false) break;
+				}
+				
+			}else{
+				for(var k in arr){
+					if(callback.call(arr[k],arr[k],k)===false) break;
+				}
+			}
+			return arr;
+		};
+		function select ( selector ){
+			var obj=document.querySelectorAll(selector);
+			obj.each=function(callback){
+				each(this,callback);
+			}
+			return obj;
+		};
+		
+	</script>
+</body>
+</html>
