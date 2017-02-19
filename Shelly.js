@@ -64,11 +64,5 @@
         return newArr; // map 方法可以返回由回调函数对原数组中的元素处理过的新数组
     }
 
-//引入工厂函数
-    function I(selector) {
-        return new F(selector)
-    };
-    window.I = I;
-    window.F = F;
 })(window);
 
